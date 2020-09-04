@@ -1,91 +1,89 @@
 <template>
-  <div id="animated-number-demo">
-  	<div id="circular">
-  		<div class="ten">
-  		</div>
-  	</div>
-  
-  	<div id="circular">
-  		<div class="vertical"></div>
-  		<div class="transverse"></div>
-  	</div>
-  
-  	<div>
-  		<div class="triangle" :class="isflip?'antiTriangle':''"></div>
-  		<button type="button" class="flipButton" @click="flip">翻转</button>
-  	</div>
-  
-  
-  	<div>
-  		<div class="square" :style="{transform: 'rotate(' + circle + 'deg)'}"></div>
-  		<button class="rotary-button" @click="rotate()">顺时针旋转45度</button>
-  	</div>
-  
-  	<div class="door">
-  		<div v-if="statusdoor" style="width: 100px; height: 100px; background-color: bisque; margin-top: 20px;"></div>
-  		<button class="openButton" @click="controlSwitch">{{switchText}}</button>
-  	</div>
-  
-  	<div>
-  		<div class="swingSquare" :class="isSwing?'squareSwing':''"></div>
-  		<button class="swingButton" @click="swing">摇摆</button>
-  	</div>
-  
-  	<div>
-  		<input type="text" class="inputText" placeholder="请输入内容" />
-  		<p style="font-size: 10px; color: #FF0000;">这个必填</p>
-  	</div>
-  
-  	
-  	
-  </div>
+	<div>
+		<div id="circular">
+			<div class="ten">
+			</div>
+		</div>
+
+		<div id="circular">
+			<div class="vertical"></div>
+			<div class="transverse"></div>
+		</div>
+
+		<div>
+			<div class="triangle" :class="isflip?'antiTriangle':''"></div>
+			<button type="button" class="flipButton" @click="flip">翻转</button>
+		</div>
+
+
+		<div>
+			<div class="square" :style="{transform: 'rotate(' + circle + 'deg)'}"></div>
+			<button class="rotary-button" @click="rotate()">顺时针旋转45度</button>
+		</div>
+
+		<div class="door">
+			<div v-if="statusdoor" style="width: 100px; height: 100px; background-color: bisque; margin-top: 20px;"></div>
+			<button class="openButton" @click="controlSwitch">{{switchText}}</button>
+		</div>
+
+		<div>
+			<div class="swingSquare" :class="isSwing?'squareSwing':''"></div>
+			<button class="swingButton" @click="swing">摇摆</button>
+		</div>
+
+		<div>
+			<input type="text" class="inputText" placeholder="请输入内容" />
+			<p style="font-size: 10px; color: #FF0000;">这个必填</p>
+		</div>
+
+
+
+	</div>
 </template>
 
 <script>
+	export default {
+		data( ) {
+			circle: 0,
+			statusdoor: false,
+			switchText: '展开',
+			isflip: false,
+			isSwing: false
+		},
+		computed: {
 
+		},
+		watch: {
 
-export default {
- name: '#animated-number-demo',
- data: {
- 	circle: 0,
- 	statusdoor: false,
- 	switchText: '展开',
- 	isflip: false,
- 	isSwing:false
- },
- computed: {
- 
- },
- watch: {
- 
- },
- methods: {
- 	rotate( ) {
- 		this.circle += 45;
- 	},
- 	flip( ) {
- 
- 		this.isflip = !this.isflip;
- 	},
- 	controlSwitch( ) {
- 		this.statusdoor = !this.statusdoor;
- 		if ( this.statusdoor ) {
- 			this.switchText = '收起';
- 		} else {
- 			this.switchText = '展开';
- 		}
- 	},
- 	swing( ) {
- 		this.isSwing = !this.isSwing;
- 	}
- }
-}
+		},
+		methods: {
+			rotate( ) {
+				this.circle += 45;
+			},
+			flip( ) {
+
+				this.isflip = !this.isflip;
+			},
+			controlSwitch( ) {
+				this.statusdoor = !this.statusdoor;
+				if ( this.statusdoor ) {
+					this.switchText = '收起';
+				} else {
+					this.switchText = '展开';
+				}
+			},
+			swing( ) {
+				this.isSwing = !this.isSwing;
+			}
+		}
+	}
+	}
 </script>
 
 <style>
-.squareSwing {
+	.squareSwing {
 		animation: shaking 3s;
-		animation-iteration-count:infinite;
+		animation-iteration-count: infinite;
 	}
 
 	@keyframes shaking {
@@ -104,7 +102,7 @@ export default {
 		75% {
 			transform: rotate(-30deg)
 		}
-		
+
 		100% {
 			transform: rotate(0deg)
 		}
