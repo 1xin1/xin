@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8">
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+	</head>
+	<body>
+		<div id="animated-number-demo">
+			<div id="circular">
+				<div class="ten">
+				</div>
+			</div>
+
+			<div id="circular">
+				<div class="vertical"></div>
+				<div class="transverse"></div>
+			</div>
+
+			<div>
+				<div class="triangle" :class="isflip?'antiTriangle':''"></div>
+				<button type="button" class="flipButton" @click="flip">翻转</button>
+			</div>
+
+
+			<div>
+				<div class="square" :style="{transform: 'rotate(' + circle + 'deg)'}"></div>
+				<button class="rotary-button" @click="rotate()">顺时针旋转45度</button>
+			</div>
+
+			<div class="door">
+				<div v-if="statusdoor" style="width: 100px; height: 100px; background-color: bisque; margin-top: 20px;"></div>
+				<button class="openButton" @click="controlSwitch">{{switchText}}</button>
+			</div>
+
+			<div>
+				<div class="swingSquare" :class="isSwing?'squareSwing':''"></div>
+				<button class="swingButton" @click="swing">摇摆</button>
+			</div>
+
+			<div>
+				<input type="text" class="inputText" placeholder="请输入内容" />
+				<p style="font-size: 10px; color: #FF0000;">这个必填</p>
+			</div>
+
+			
+			
+		</div>
+	</body>
+</html>
+
+
+
+<script>
+	var vm = new Vue( {
+		el: '#animated-number-demo',
+		data: {
+			circle: 0,
+			statusdoor: false,
+			switchText: '展开',
+			isflip: false,
+			isSwing:false
+		},
+		computed: {
+
+		},
+		watch: {
+
+		},
+		methods: {
+			rotate( ) {
+				this.circle += 45;
+			},
+			flip( ) {
+
+				this.isflip = !this.isflip;
+			},
+			controlSwitch( ) {
+				this.statusdoor = !this.statusdoor;
+				if ( this.statusdoor ) {
+					this.switchText = '收起';
+				} else {
+					this.switchText = '展开';
+				}
+			},
+			swing( ) {
+				this.isSwing = !this.isSwing;
+			}
+		}
+	} )
+</script>
+
+
+<style>
+	.squareSwing {
+		animation: shaking 3s;
+		animation-iteration-count:infinite;
+	}
+
+	@keyframes shaking {
+		0% {
+			transform: rotate(0deg)
+		}
+
+		25% {
+			transform: rotate(30deg)
+		}
+
+		50% {
+			transform: rotate(0deg)
+		}
+
+		75% {
+			transform: rotate(-30deg)
+		}
+		
+		100% {
+			transform: rotate(0deg)
+		}
+	}
+
+	.swingSquare {
+		width: 100px;
+		height: 100px;
+		background-color: bisque;
+		margin-top: 20px;
+		margin-left: 50px;
+	}
+
+	.swingButton {
+		margin-top: 10px;
+		margin-left: 85px;
+	}
+
+	.inputText {
+		margin-top: 10px;
+	}
+
+	.door {
+		display: flex;
+	}
+
+	.openButton {
+		width: 30px;
+		height: 40px;
+		margin-top: 50px;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.flipButton {
+		margin-top: 5px;
+	}
+
+	.rotary-button {
+		margin-top: 5px;
+	}
+
+	.square {
+		height: 30px;
+		width: 30px;
+		border-color: #FF9600 #FF0000 #0000FF #00FF00;
+		border-style: solid;
+		border-width: 20px;
+		margin-top: 20px;
+	}
+
+	.triangle {
+		height: 0px;
+		width: 0px;
+		border-color: #FF9600 transparent transparent #FF9600;
+		border-style: solid;
+		border-width: 20px;
+		margin-top: 10px;
+		transition-duration: 1s;
+		transition-timing-function: ease-out;
+	}
+
+	.antiTriangle {
+		border-color: transparent #FF9600 #FF9600 transparent;
+		transition-duration: 1s;
+		transition-timing-function: ease-in;
+	}
+
+	.transverse {
+		height: 1px;
+		width: 16px;
+		background-color: black;
+		position: relative;
+		left: 8px;
+	}
+
+	.vertical {
+		height: 16px;
+		width: 1px;
+		background-color: black;
+		position: relative;
+		top: 8px;
+		left: 16px;
+	}
+
+	#circular {
+		margin-top: 10px;
+		width: 32px;
+		height: 32px;
+		border: 1px dashed black;
+		border-radius: 50%;
+	}
+
+	.ten {
+		border-right: 1px solid black;
+		border-bottom: 1px solid black;
+		width: 11px;
+		height: 11px;
+		position: relative;
+		top: 8px;
+		left: 10px;
+		transform: rotate(45deg);
+	}
+</style>
